@@ -1,78 +1,93 @@
 # Soccer MCP Server ⚽
 
-Un servidor MCP (Model Context Protocol) que proporciona acceso a datos de fútbol en tiempo real a través de la API de Football-Data.org. Este servidor actúa como "puente" entre Claude y una fuente de datos externa para responder preguntas sobre fútbol.
+A Model Context Protocol (MCP) server that provides real-time access to football/soccer data through the Football-Data.org API. This server acts as a "bridge" between Claude a## 📝 Limitations
 
-## 🌟 Características
+- **Free plan**: 10 calls per minute
+- **Historical data**: Limited in the free plan
+- **Competitions**: Not all leagues are available in the free plan
 
-- **Obtener equipos por competición**: Consulta todos los equipos de una liga específica
-- **Listar competiciones disponibles**: Ve todas las ligas y torneos disponibles
-- **Integración con Claude**: Funciona perfectamente con Claude Desktop
-- **API confiable**: Utiliza Football-Data.org como fuente de datos
+## 🔗 Useful Links
 
-## 📋 Requisitos previos
+- [Football-Data.org](https://www.football-data.org/) - Football data API
+- [Claude Desktop](https://claude.ai/download) - Claude client
+- [Model Context Protocol](https://modelcontextprotocol.io/) - Official MCP documentation
+- [FastMCP](https://github.com/jlowin/fastmcp) - Framework for MCP servers
 
-- **Python 3.8+** instalado en tu sistema
-- **Cuenta en Football-Data.org** para obtener una API key gratuita
-- **Claude Desktop** (para usar el servidor MCP)
+---
 
-## 🔑 Obtener tu API Key de Football-Data.org
+⚽ **Enjoy querying football data with Claude!** ⚽ources to answer football-related questions.
 
-1. **Visita**: [https://www.football-data.org/](https://www.football-data.org/)
-2. **Regístrate**: Haz clic en "Register" y crea una cuenta gratuita
-3. **Verifica tu email**: Confirma tu cuenta a través del correo de verificación
-4. **Obtén tu API key**: 
-   - Inicia sesión en tu cuenta
-   - Ve a tu dashboard/perfil
-   - Copia tu **API Token**
+## 🌟 Features
 
-### Plan gratuito incluye:
-- ✅ 10 llamadas por minuto
-- ✅ Acceso a competiciones principales
-- ✅ Datos de equipos y jugadores básicos
+- **Get teams by competition**: Query all teams from a specific league
+- **List available competitions**: View all available leagues and tournaments
+- **Claude integration**: Works seamlessly with Claude Desktop
+- **Reliable API**: Uses Football-Data.org as the data source
 
-## 🚀 Instalación
+## 📋 Prerequisites
 
-### 1. Clonar el repositorio
+- **Python 3.8+** installed on your system
+- **Football-Data.org account** to get a free API key
+- **Claude Desktop** (to use the MCP server)
+
+## 🔑 Getting your Football-Data.org API Key
+
+1. **Visit**: [https://www.football-data.org/](https://www.football-data.org/)
+2. **Register**: Click "Register" and create a free account
+3. **Verify your email**: Confirm your account through the verification email
+4. **Get your API key**: 
+   - Log into your account
+   - Go to your dashboard/profile
+   - Copy your **API Token**
+
+### Free plan includes:
+- ✅ 10 calls per minute
+- ✅ Access to major competitions
+- ✅ Basic team and player data
+
+## 🚀 Installation
+
+### 1. Clone the repository
 ```bash
 git clone https://github.com/Javilejoo/Soccer-MCP-Server.git
 cd Soccer-MCP-Server
 ```
 
-### 2. Crear entorno virtual
+### 2. Create virtual environment
 ```bash
-# En Windows
+# On Windows
 python -m venv soccervenv
 soccervenv\Scripts\activate
 
-# En macOS/Linux
+# On macOS/Linux
 python3 -m venv soccervenv
 source soccervenv/bin/activate
 ```
 
-### 3. Instalar dependencias
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configurar variables de entorno
-Crea un archivo `.env` en la raíz del proyecto:
+### 4. Configure environment variables
+Create a `.env` file in the project root:
 ```env
-API_KEY=tu_api_key_aquí
+API_KEY=your_api_key_here
 FOOTBALL_BASE=https://api.football-data.org/v4
 HTTP_TIMEOUT=10
 ```
 
-**Importante**: Reemplaza `tu_api_key_aquí` con tu API key real de Football-Data.org
+**Important**: Replace `your_api_key_here` with your actual Football-Data.org API key
 
-## ⚙️ Configuración en Claude Desktop
+## ⚙️ Claude Desktop Configuration
 
-### 1. Localizar el archivo de configuración
+### 1. Locate the configuration file
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Linux**: `~/.config/Claude/claude_desktop_config.json`
 
-### 2. Agregar configuración MCP
-Abre el archivo `claude_desktop_config.json` y agrega:
+### 2. Add MCP configuration
+Open the `claude_desktop_config.json` file and add:
 
 ```json
 {
@@ -80,57 +95,57 @@ Abre el archivo `claude_desktop_config.json` y agrega:
     "soccer-mcp-server": {
       "command": "python",
       "args": [
-        "C:/ruta/completa/a/tu/Soccer-MCP-Server/src/server.py"
+        "C:/full/path/to/your/Soccer-MCP-Server/src/server.py"
       ],
       "env": {
-        "PYTHONPATH": "C:/ruta/completa/a/tu/Soccer-MCP-Server/soccervenv/Scripts"
+        "PYTHONPATH": "C:/full/path/to/your/Soccer-MCP-Server/soccervenv/Scripts"
       }
     }
   }
 }
 ```
 
-**Importante**: 
-- Reemplaza `C:/ruta/completa/a/tu/Soccer-MCP-Server` con la ruta real donde clonaste el proyecto
-- Usa barras diagonales (`/`) incluso en Windows para la configuración JSON
+**Important**: 
+- Replace `C:/full/path/to/your/Soccer-MCP-Server` with the actual path where you cloned the project
+- Use forward slashes (`/`) even on Windows for JSON configuration
 
-### 3. Reiniciar Claude Desktop
-Cierra completamente Claude Desktop y vuelve a abrirlo para que cargue la nueva configuración.
+### 3. Restart Claude Desktop
+Completely close Claude Desktop and reopen it to load the new configuration.
 
-## 🎮 Uso
+## 🎮 Usage
 
-Una vez configurado, puedes hacer preguntas a Claude como:
+Once configured, you can ask Claude questions like:
 
-### Ejemplos de preguntas:
+### Example questions:
 
-**Obtener equipos de una liga:**
-- "¿Cuáles son los equipos de la Premier League?"
-- "Muéstrame todos los equipos de La Liga"
-- "¿Qué equipos juegan en la Serie A?"
+**Get teams from a league:**
+- "What are the teams in the Premier League?"
+- "Show me all teams in La Liga"
+- "Which teams play in Serie A?"
 
-**Ver competiciones disponibles:**
-- "¿Qué competiciones de fútbol están disponibles?"
-- "Muéstrame todas las ligas"
-- "¿Qué torneos puedo consultar?"
+**View available competitions:**
+- "What football competitions are available?"
+- "Show me all leagues"
+- "What tournaments can I query?"
 
-### Códigos de competiciones comunes:
-- `PL` - Premier League (Inglaterra)
-- `PD` - Primera División / La Liga (España)
-- `BL1` - Bundesliga (Alemania)
-- `SA` - Serie A (Italia)
-- `FL1` - Ligue 1 (Francia)
+### Common competition codes:
+- `PL` - Premier League (England)
+- `PD` - Primera División / La Liga (Spain)
+- `BL1` - Bundesliga (Germany)
+- `SA` - Serie A (Italy)
+- `FL1` - Ligue 1 (France)
 - `CL` - Champions League
-- `WC` - Copa del Mundo
+- `WC` - World Cup
 
-## 🛠️ Herramientas disponibles
+## 🛠️ Available Tools
 
 ### `get_teams_competitions(competition_id: str)`
-Obtiene todos los equipos de una competición específica.
+Gets all teams from a specific competition.
 
-**Parámetros:**
-- `competition_id`: Código de la competición (ej: "PL", "CL", "BL1")
+**Parameters:**
+- `competition_id`: Competition code (e.g., "PL", "CL", "BL1")
 
-**Ejemplo de respuesta:**
+**Example response:**
 ```json
 {
   "count": 20,
@@ -147,9 +162,9 @@ Obtiene todos los equipos de una competición específica.
 ```
 
 ### `get_competitions()`
-Obtiene todas las competiciones disponibles.
+Gets all available competitions.
 
-**Ejemplo de respuesta:**
+**Example response:**
 ```json
 {
   "count": 35,
@@ -166,43 +181,43 @@ Obtiene todas las competiciones disponibles.
 }
 ```
 
-## 🔧 Estructura del proyecto
+## 🔧 Project Structure
 
 ```
 Soccer-MCP-Server/
 ├── src/
-│   └── server.py          # Servidor MCP principal
-├── soccervenv/            # Entorno virtual Python
-├── .env                   # Variables de entorno
-├── requirements.txt       # Dependencias Python
-└── README.md             # Este archivo
+│   └── server.py          # Main MCP server
+├── soccervenv/            # Python virtual environment
+├── .env                   # Environment variables
+├── requirements.txt       # Python dependencies
+└── README.md             # This file
 ```
 
-## 🐛 Solución de problemas
+## 🐛 Troubleshooting
 
-### Error: "API_KEY no está configurado"
-- Verifica que el archivo `.env` existe en la raíz del proyecto
-- Asegúrate de que la API key está correctamente configurada sin espacios extra
+### Error: "API_KEY not configured"
+- Verify that the `.env` file exists in the project root
+- Make sure the API key is correctly configured without extra spaces
 
-### Error: "Servidor MCP no encontrado"
-- Verifica que la ruta en `claude_desktop_config.json` es correcta
-- Asegúrate de usar barras diagonales (`/`) en las rutas
-- Reinicia Claude Desktop completamente
+### Error: "MCP server not found"
+- Verify that the path in `claude_desktop_config.json` is correct
+- Make sure to use forward slashes (`/`) in paths
+- Restart Claude Desktop completely
 
 ### Error: "HTTP 401 Unauthorized"
-- Tu API key puede ser inválida o haber expirado
-- Verifica tu cuenta en Football-Data.org
-- Genera una nueva API key si es necesario
+- Your API key might be invalid or expired
+- Check your Football-Data.org account
+- Generate a new API key if necessary
 
 ### Error: "HTTP 429 Too Many Requests"
-- Has excedido el límite de 10 llamadas por minuto del plan gratuito
-- Espera un minuto antes de hacer más consultas
+- You've exceeded the 10 calls per minute limit of the free plan
+- Wait one minute before making more queries
 
-## 📝 Limitaciones
+## 📝 Limitations
 
-- **Plan gratuito**: 10 llamadas por minuto
-- **Datos históricos**: Limitados en el plan gratuito
-- **Competiciones**: No todas las ligas están disponibles en el plan gratuito
+- **Free plan**: 10 calls per minute
+- **Historical data**: Limited in the free plan
+- **Competitions**: Not all leagues are available in the free plan
 
 
 ## 🔗 Enlaces útiles
